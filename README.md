@@ -45,14 +45,24 @@ function. All those parameters were chosen randomly as a starting point.
 - Compiling and training our model using the X_train_scaled data and epochs = 300 , again chosen randomly as a starting point.
 - Evaluating the model using the X_test_scaled data.
 * This resulted to a predictive accuracy score of `72.5%` which is lower than the targetted score of at least `75%` , prompting the model optimization.
+<img width="970" alt="Screenshot 2024-08-02 at 6 21 58 PM" src="https://github.com/user-attachments/assets/5a7dbbbf-7a91-4969-a1aa-fa5bbc7e7d94">
 
 #### 3-Optimize the Model
 ---
 * In order to upscale our accuracy score , we decided to use the` keras_tuner` library to create a new Sequential model with hyperparameter options.
 - First we defined a function  named `create_model(hp)` to return our model, then set it up to pick the best activation functions , the number of layers , and the number of neurons in each layer .Then we compiled the model , imported the `keras_tuner` and ran it , got the best hyperparameters and finally evaluated it.This got us a model with an accuracy score of `72.6%`, almost exactly as our initial model.This finding lead us to the understanding that with our current prepocessing we wouldn't be able to achieve our targetted score ,therefore we had to rethink our initial process.
-- With that insight ,  we decided to reduce the bins on the `APPLICATION_TYPE` and `CLASSIFICATION` by setting the cutoff_value to `1065` and `777` respectively. We also increased our training data ratio from 75% to 85% and increased the number of hidden layers from 2 to 4. We assigned 20 nodes to each one of the 4 hidden layers .We also used `relu`  activation function on the input layer , `tanh` on the 3 hidden layers and the `sigmoid` function on the output layer.Finally we increased the epochs number to '500',compiled, trained and evaluated the model .Those new parameters lead to an accuracy score `72.6%` ,which was not any better than the previous optimization attempt.
+- 
+  <img width="965" alt="Screenshot 2024-08-02 at 6 23 48 PM" src="https://github.com/user-attachments/assets/50aabea2-8676-43b8-ad14-8f2def26932b">
+
+- With that insight ,  we decided to reduce the bins on the `APPLICATION_TYPE` and `CLASSIFICATION` by setting the cutoff_value to `1065` and `777` respectively. We also increased our training data ratio from 75% to 85% and increased the number of hidden layers from 2 to 4. We assigned 20 nodes to each one of the 4 hidden layers .We also used `relu`  activation function on the input layer , `tanh` on the 3 hidden layers and the `sigmoid` function on the output layer.Finally we increased the epochs number to '500',compiled, trained and evaluated the model .Those new parameters lead to an accuracy score `72.6%` ,which was not any better than the previous optimization attempt
+- 
+<img width="937" alt="Screenshot 2024-08-02 at 6 25 35 PM" src="https://github.com/user-attachments/assets/563c868f-e2f5-4a8b-bd9b-41ea50cb1e79">
+
 - As a last resort , we decided to keep the 'EIN' column and almost the same parameters as previously set but instead of `tanh` , we used the `sigmoid` function on the hidden layers , increased the epochs to 800 and increased the training data ratio to 90%.This boosted our model accuracy score to `73.1%`
+
+<img width="936" alt="Screenshot 2024-08-02 at 6 26 54 PM" src="https://github.com/user-attachments/assets/bd2aac59-a336-4efe-a548-a20cea8f6307">
 ---
+
 ### Summary
 ---
 In summary , we were tasked with creating a Deep Learning Model than can predict the outcome of bussiness ventures funded by the foundation `Alphabet Soup` with and accuracy score of at least `75%`.For that we preprocessed our data , created a deep learning model , compiled ,trained and  evaluated it and made 3 attempts to optimize it in hope of reaching our targetted accuracy score but ultimately we could not get there.Given that this was a binary classification , a logistic regression could have done a better job at predicting the outcome with the expected level of accuracy .
